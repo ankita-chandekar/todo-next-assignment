@@ -23,6 +23,15 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the TODO application.
 
+## Working Flow
+
+1. Login with admin@gmail.com/Admin@123, list of tasks has been already added.
+2. To edit & delete task, click on edit & delete icon respectively
+3. To view the task, click on the title.
+4. To mark the task as complete, click on task title, you will be redirected to task detail page, on clicking Mark as complete, task is Marked as completed.
+5. User can search the task from the searchbar
+6. Logout functionality added.
+
 🚀 Implemented
 ✅ User Authentication using next-auth, register & login functionality, protected routes.
 
@@ -31,8 +40,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ✅ Task can also be marked as complete.
 
 ✅ Implemented Next js API routes, used MongoDB to store data.
-
-## Learn More
 
 ## Deploy on Vercel
 
