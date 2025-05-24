@@ -6,6 +6,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { Params } from "next/dist/server/request/params";
 import { TODO } from "@/types/todoTypes";
+import { baseURL } from "@/lib/baseURL";
 
 const TodoPage = () => {
   const params: Params = useParams();
@@ -14,7 +15,7 @@ const TodoPage = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(`http://localhost:3000/api/todo/${params.id}`);
+      const data = await fetch(`${baseURL}/api/todo/${params.id}`);
       const response = await data.json();
 
       if (response) {
@@ -26,12 +27,9 @@ const TodoPage = () => {
 
   const handleDeleteTodo = async () => {
     try {
-      const deleteTodo = await fetch(
-        `http://localhost:3000/api/todo/${params.id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const deleteTodo = await fetch(`${baseURL}/api/todo/${params.id}`, {
+        method: "DELETE",
+      });
       const deleteTodoResp = await deleteTodo.json();
       if (deleteTodoResp) {
         router.push("/todo");
@@ -43,7 +41,7 @@ const TodoPage = () => {
 
   const handleMarkAsComplete = async (task: TODO) => {
     try {
-      const data = await fetch(`http://localhost:3000/api/todo/${params.id}`, {
+      const data = await fetch(`${baseURL}/api/todo/${params.id}`, {
         method: "PUT",
         body: JSON.stringify({
           todo: task.todo,

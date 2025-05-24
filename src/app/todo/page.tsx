@@ -9,8 +9,9 @@ import { RiProgress2Line } from "react-icons/ri";
 import { TbProgressCheck } from "react-icons/tb";
 import { ToastContainer, toast } from "react-toastify";
 import { FaSearch } from "react-icons/fa";
-import LogoutWrapper from "@/components/LogoutWrapper/LogoutWrapper";
+import LogoutWrapper from "@/components/LogoutWrapper";
 import { TODO } from "@/types/todoTypes";
+import { baseURL } from "@/lib/baseURL";
 
 const page = () => {
   const [search, setSearch] = useState("");
@@ -20,7 +21,7 @@ const page = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const getTodo = await fetch("http://localhost:3000/api/todo", {
+      const getTodo = await fetch(`${baseURL}/api/todo`, {
         cache: "no-store",
       });
       const response = await getTodo.json();

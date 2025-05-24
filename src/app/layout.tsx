@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import LogoutWrapper from "@/components/LogoutWrapper/LogoutWrapper";
-import SessionProviderWrapper from "@/components/LogoutWrapper/SessionProviderWrapper";
+import LogoutWrapper from "@/components/LogoutWrapper";
+import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Todo App",

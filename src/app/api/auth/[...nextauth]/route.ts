@@ -1,3 +1,4 @@
+import { baseURL } from "@/lib/baseURL";
 import { USER } from "@/types/userType";
 import NextAuth, { Session, SessionStrategy } from "next-auth";
 import { JWT } from "next-auth/jwt";
@@ -17,7 +18,8 @@ export const authOptions = {
           email: credentials?.email,
           password: credentials?.password,
         };
-        const resp = await fetch("http://localhost:3000/api/login", {
+
+        const resp = await fetch(`${baseURL}/api/login`, {
           method: "POST",
           headers: {
             Accept: "application/json",
