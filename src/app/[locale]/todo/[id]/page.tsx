@@ -25,7 +25,7 @@ const TodoPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   const handleDeleteTodo = async () => {
     try {

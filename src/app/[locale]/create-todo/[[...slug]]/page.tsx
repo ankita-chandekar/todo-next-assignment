@@ -69,7 +69,7 @@ const CreateTodo = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [state]);
+  }, [state, isEditMode, router, t]);
 
   if (!isAuthenticated)
     return (

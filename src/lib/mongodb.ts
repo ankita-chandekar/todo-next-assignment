@@ -1,10 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/todo_database";
 
+interface MongooseCache {
+  conn: Mongoose | null;
+  promise: Promise<Mongoose> | null;
+}
 declare global {
-  var mongoose: any;
+  // eslint-disable-next-line no-var
+  var mongoose: MongooseCache;
 }
 
 let cached = global.mongoose;

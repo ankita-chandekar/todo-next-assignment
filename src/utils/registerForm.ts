@@ -5,7 +5,7 @@ type RegisterFormResponse = {
   error: string | null;
 };
 const registerForm = async (
-  prevState: any,
+  prevState: RegisterFormResponse,
   formData: FormData
 ): Promise<RegisterFormResponse> => {
   const name = formData.get("name") as string;
@@ -29,7 +29,7 @@ const registerForm = async (
       success: true,
       error: null,
     };
-  } catch (err) {
+  } catch {
     return { error: "Something went wrong", success: false };
   }
 };

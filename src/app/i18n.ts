@@ -2,12 +2,14 @@ import { createInstance } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import i18nConfig from "@/../i18nConfig";
+import type { i18n as I18nInstanceType } from "i18next";
+import type { Resource } from "i18next";
 
 export default async function initTranslations(
   locale: string,
   namespaces: string[],
-  i18nInstance?: any,
-  resources?: any
+  i18nInstance?: I18nInstanceType,
+  resources?: Resource
 ) {
   i18nInstance = i18nInstance || createInstance();
 

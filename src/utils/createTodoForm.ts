@@ -6,7 +6,7 @@ type CreateTodoResponse = {
 };
 
 const createTodoForm = async (
-  prev: any,
+  prev: CreateTodoResponse,
   formData: FormData
 ): Promise<CreateTodoResponse> => {
   const todo = formData.get("todo") as string;
@@ -50,7 +50,7 @@ const createTodoForm = async (
         error: null,
       };
     }
-  } catch (err) {
+  } catch {
     return { error: "Task created successfully", success: false };
   }
 };

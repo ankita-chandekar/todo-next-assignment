@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { USER } from "@/types/userType";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   await connectDB();
 
   return NextResponse.json({ message: "Hello from API route!" });
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       message: "User registed Successfully",
       user: newUser,
     });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

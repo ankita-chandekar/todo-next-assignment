@@ -5,7 +5,7 @@ import Login from "./page";
 
 const layout = async ({ params }: { params: { locale: string } }) => {
   const { locale } = await params;
-  const { t, resources } = await initTranslations(locale, ["common"]);
+  const { resources } = await initTranslations(locale, ["common"]);
 
   return (
     <TranslationsProvider

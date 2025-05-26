@@ -14,7 +14,7 @@ import { TODO } from "@/types/todoTypes";
 import { baseURL } from "@/lib/baseURL";
 import { useTranslation } from "react-i18next";
 
-const page = () => {
+const Todo = () => {
   const [search, setSearch] = useState("");
   const [todos, setTodos] = useState<TODO[]>([]);
   const [allTodos, setAllTodos] = useState<TODO[]>([]);
@@ -64,7 +64,7 @@ const page = () => {
     } else {
       handleSearch();
     }
-  }, [search]);
+  }, [search, allTodos, todos]);
 
   return (
     <>
@@ -153,4 +153,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Todo;

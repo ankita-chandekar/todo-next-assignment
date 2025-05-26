@@ -5,7 +5,7 @@ type LoginFormResponse = {
 import { SignInResponse, signIn } from "next-auth/react";
 
 const loginForm = async (
-  prevState: any,
+  prevState: LoginFormResponse,
   formData: FormData
 ): Promise<LoginFormResponse> => {
   const email = formData.get("email") as string;

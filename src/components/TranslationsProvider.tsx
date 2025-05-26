@@ -4,12 +4,13 @@ import { createInstance } from "i18next";
 import { I18nextProvider } from "react-i18next";
 
 import React, { ReactNode } from "react";
+import type { Resource } from "i18next";
 
 interface TranslationsProvider {
   children: ReactNode;
   locale: string;
   namespaces: string[];
-  resources?: Record<string, any>;
+  resources?: Resource;
 }
 
 const TranslationsProvider = ({

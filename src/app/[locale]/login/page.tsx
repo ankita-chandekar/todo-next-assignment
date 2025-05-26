@@ -22,7 +22,7 @@ const Login = () => {
     } else {
       toast.error(state?.error);
     }
-  }, [state]);
+  }, [state, route]);
 
   return (
     <>

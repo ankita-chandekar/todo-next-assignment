@@ -21,7 +21,7 @@ export default async function RootLayout({
   params: { [key: string]: string };
 }) {
   const { locale } = await params;
-  const { t, resources } = await initTranslations(locale, ["common"]);
+  const { resources } = await initTranslations(locale, ["common"]);
   return (
     <html>
       <body>

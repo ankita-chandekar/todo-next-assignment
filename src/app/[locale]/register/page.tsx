@@ -34,7 +34,7 @@ const Register = () => {
       console.log("error");
       toast.error(state?.error);
     }
-  }, [state]);
+  }, [state, t]);
 
   return (
     <>
