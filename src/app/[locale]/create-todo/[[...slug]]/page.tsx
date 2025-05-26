@@ -2,12 +2,17 @@
 
 import { TODO } from "@/types/todoTypes";
 import createTodoForm from "@/utils/createTodoForm";
+import useRequireAuth from "@/utils/useRequireAuth";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { BiLoaderCircle } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const CreateTodo = () => {
+  const { isAuthenticated } = useRequireAuth();
+
   const [state, formAction] = useActionState(createTodoForm, {
     error: null,
     success: false,
@@ -22,6 +27,8 @@ const CreateTodo = () => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,9 +52,9 @@ const CreateTodo = () => {
 
     if (state?.success) {
       if (isEditMode) {
-        toast.success("Task Updated successfully");
+        toast.success(t("task_updated_success"));
       } else {
-        toast.success("Task created successfully");
+        toast.success(t("task_created_success"));
       }
 
       timeout = setTimeout(() => {
@@ -64,6 +71,16 @@ const CreateTodo = () => {
     };
   }, [state]);
 
+  if (!isAuthenticated)
+    return (
+      <div className="flex items-center justify-center h-screen w-screen">
+        <BiLoaderCircle
+          size={40}
+          className="animate-spin text-2xl text-gray-600 mx-auto h-full"
+        />
+      </div>
+    );
+
   return (
     <>
       <div className="m-0 h-screen w-screen bg-sky-100 bg-linear-to-t from-white-50 to-blue-300">
@@ -73,9 +90,11 @@ const CreateTodo = () => {
               <div className="bg-amber-50 h-12 w-12 mb-10 rounded-2xl flex justify-center items-center">
                 <FiLogIn fontSize={24} />
               </div>{" "}
-              <div className="text-2xl font-bold font-sans">Add new task</div>
+              <div className="text-2xl font-bold font-sans">
+                {t("add_task")}
+              </div>
               <div className="font-sans font-normal text-gray-500 text-sm px-5 text-center mb-6">
-                Add, update, delete and maintian your todo list in one go...
+                {t("sign_in_desc")}
               </div>
               <form action={formAction}>
                 {isEditMode && (
@@ -84,7 +103,7 @@ const CreateTodo = () => {
                 <input
                   type="text"
                   name="todo"
-                  placeholder="Title"
+                  placeholder={t("title")}
                   className="bg-gray-100 w-full p-2 rounded-lg mb-4"
                   onChange={handleChange}
                   value={formValue.todo}
@@ -92,7 +111,7 @@ const CreateTodo = () => {
                 <textarea
                   rows={4}
                   name="desc"
-                  placeholder="Description.."
+                  placeholder={t("desc")}
                   className="bg-gray-100 w-full p-2 rounded-lg mb-4"
                   onChange={handleChange}
                   value={formValue.desc}
@@ -101,7 +120,7 @@ const CreateTodo = () => {
                   type="submit"
                   className="bg-black w-full rounded-2xl p-4 text-white font-sans font-bold cursor-pointer"
                 >
-                  {isEditMode ? "Update Task" : "Create Task"}
+                  {isEditMode ? t("update_task") : t("create_task")}
                 </button>
               </form>
             </div>

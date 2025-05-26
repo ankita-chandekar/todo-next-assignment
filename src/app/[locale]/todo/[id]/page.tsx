@@ -7,11 +7,13 @@ import { toast } from "react-toastify";
 import { Params } from "next/dist/server/request/params";
 import { TODO } from "@/types/todoTypes";
 import { baseURL } from "@/lib/baseURL";
+import { useTranslation } from "react-i18next";
 
 const TodoPage = () => {
   const params: Params = useParams();
   const router = useRouter();
   const [task, setTask] = useState<TODO | null>(null);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -53,12 +55,12 @@ const TodoPage = () => {
       if (data.ok) {
         const updatedResp: { todo: TODO } = await data.json();
         setTask(updatedResp?.todo);
-        toast.success("Task marked as completed");
+        toast.success(t("mark_as_completed_success"));
         setTimeout(() => {
           router.push("/todo");
         }, 2000);
       } else {
-        toast.error("Task cannot be marked completed");
+        toast.error(t("mark_as_completed_error"));
       }
     } catch (err) {
       console.log("Error while updating mark as complete", err);
@@ -84,7 +86,7 @@ const TodoPage = () => {
               {" "}
               <div className="flex justify-between items-center mb-5">
                 <h2 className="font-extrabold font-sans text-4xl ">
-                  TODO SELECTED ITEM
+                  {t("todo_selected")}
                 </h2>
               </div>
               <div className="flex flex-col">
@@ -95,20 +97,21 @@ const TodoPage = () => {
                   {task?.desc}
                 </p>
                 <p className="text-lg font-medium font-sans mb-5">
-                  Progress : {task?.completed ? "Completed" : "In Progress"}
+                  {t("progress")} :
+                  {task?.completed ? t("completed") : t("in_progress")}
                 </p>
                 <div className="flex flex-row justify-between my-5">
                   <button
                     className="bg-sky-600 w-auto rounded-2xl py-4 px-8 mr-5 text-white font-sans font-bold cursor-pointer"
                     onClick={handleUpdateTodo}
                   >
-                    Update
+                    {t("update")}
                   </button>
                   <button
                     className="bg-red-400 w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
                     onClick={handleDeleteTodo}
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
                 <div>
@@ -117,7 +120,7 @@ const TodoPage = () => {
                       className="bg-green-700 rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
                       onClick={() => handleMarkAsComplete(task)}
                     >
-                      Mark As Complete
+                      {t("mark_as_completed")}
                     </button>
                   )}
                 </div>

@@ -1,30 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
-import { parseAuthCookie, verifyToken } from "./utils/jwt";
+import { NextRequest } from "next/server";
+import { i18nRouter } from "next-i18n-router";
+import i18nConfig from "./../i18nConfig";
 
 export async function middleware(req: NextRequest) {
   console.log("middleware console");
   console.log("Middleware triggered for:", req.nextUrl.pathname);
-  const token = parseAuthCookie(req.headers.get("cookie") || undefined);
 
-  console.log("token", token);
-
-  // if (!token) {
-  //   return NextResponse.redirect(new URL("/login", req.url));
-  // }
-  // const payload = verifyToken(token);
-  // console.log("payload", payload);
-  // if (!payload) {
-  //   const response = NextResponse.redirect(new URL("/login", req.url));
-  //   response.cookies.delete("authToken");
-  //   return response;
-  // } else {
-  //   if (token && payload !== null) {
-  //     return NextResponse.redirect("/todo");
-  //   }
-  // }
-  return NextResponse.next();
+  return i18nRouter(req, i18nConfig);
 }
 
 export const config = {
-  matcher: ["/todo/:path*", "/create-todo/:path*"],
+  matcher: "/((?!api|static|.*\\..*|_next).*)",
 };

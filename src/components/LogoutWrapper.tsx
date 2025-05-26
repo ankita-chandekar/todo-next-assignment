@@ -1,13 +1,16 @@
 "use client";
 
 import useRequireAuth from "@/utils/useRequireAuth";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const LogoutWrapper = () => {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   const { isAuthenticated } = useRequireAuth();
   const loginPage = ["/login"].includes(pathname);
@@ -20,7 +23,7 @@ const LogoutWrapper = () => {
             className="bg-black w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
             onClick={() => signOut({ callbackUrl: "/login" })}
           >
-            Logout
+            {t("logout")}
           </button>
         </div>
       )}

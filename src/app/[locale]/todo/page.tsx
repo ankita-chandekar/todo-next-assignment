@@ -12,12 +12,14 @@ import { FaSearch } from "react-icons/fa";
 import LogoutWrapper from "@/components/LogoutWrapper";
 import { TODO } from "@/types/todoTypes";
 import { baseURL } from "@/lib/baseURL";
+import { useTranslation } from "react-i18next";
 
 const page = () => {
   const [search, setSearch] = useState("");
   const [todos, setTodos] = useState<TODO[]>([]);
   const [allTodos, setAllTodos] = useState<TODO[]>([]);
   const router = useRouter();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +45,7 @@ const page = () => {
     const deletedId: string | undefined = await handleDeleteTodo(id);
     if (deletedId) {
       setTodos((prev) => prev.filter((ele: TODO) => ele?._id !== deletedId));
-      toast.success("Task deleted");
+      toast.success(t("task_deleted_success"));
     }
   };
 
@@ -71,12 +73,14 @@ const page = () => {
           <div className="bg-sky-50 p-10 w-4/5 h-3/4 bg-linear-to-t from-white-500 to-blue-200 rounded-3xl shadow-lg border-0 ">
             <LogoutWrapper />
             <div className="flex justify-between items-center mb-5">
-              <h2 className="font-extrabold font-sans text-4xl ">TODO</h2>
+              <h2 className="font-extrabold font-sans text-4xl ">
+                {t("todo")}
+              </h2>
               <Link
                 className="bg-black w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
                 href="/create-todo"
               >
-                Create
+                {t("create")}
               </Link>
             </div>
             <div className="mb-5 relative">
@@ -84,7 +88,7 @@ const page = () => {
                 type="text"
                 name="searchbar"
                 value={search}
-                placeholder="Search your todo item"
+                placeholder={t("search_placeholder")}
                 className="bg-gray-100 w-full p-4 rounded-lg "
                 onChange={(e) => setSearch(e.target.value)}
               />
@@ -137,7 +141,7 @@ const page = () => {
                 })
               ) : (
                 <div className="font-sans text-3xl  flex items-center justify-center">
-                  No Task Added
+                  {t("no_task_added")}
                 </div>
               )}
             </div>

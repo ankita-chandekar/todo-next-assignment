@@ -65,12 +65,12 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
 
-    const id = context.params.id;
+    const { id } = await params;
     if (!isValidObjectId(id)) {
       return NextResponse.json({ error: "Invalid ID format" }, { status: 400 });
     }
