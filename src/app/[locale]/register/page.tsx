@@ -2,13 +2,15 @@
 
 import registerForm from "@/utils/registerForm";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useActionState, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiLogIn } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
 
 const Register = () => {
   const { t } = useTranslation();
+  const router = useRouter();
   const [state, formAction] = useActionState(registerForm, {
     error: null,
     success: false,
@@ -28,6 +30,7 @@ const Register = () => {
     if (state?.success) {
       toast.success(t("register_success"));
       setFormValue({ name: "", email: "", password: "" });
+      setTimeout(() => router.push("/login"), 3000);
     }
 
     if (state?.error) {
