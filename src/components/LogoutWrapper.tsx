@@ -18,7 +18,7 @@ const LogoutWrapper = () => {
   return (
     <>
       {isAuthenticated && !loginPage && (
-        <div className="absolute right-10 top-10">
+        <div className="absolute right-3 md:right-10 top-3 md:top-10">
           <button
             className="bg-black w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
             onClick={() => signOut({ callbackUrl: "/login" })}
