@@ -37,7 +37,7 @@ const Register = () => {
       console.log("error");
       toast.error(state?.error);
     }
-  }, [state, t]);
+  }, [state, t, router]);
 
   return (
     <>
