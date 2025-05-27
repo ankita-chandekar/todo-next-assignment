@@ -1,5 +1,4 @@
 import { ToastContainer } from "react-toastify";
-import CreateTodo from "./page";
 
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";

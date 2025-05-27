@@ -6,6 +6,8 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BiLoaderCircle } from "react-icons/bi";
+import { RiProgress2Line } from "react-icons/ri";
+import { TbProgressCheck } from "react-icons/tb";
 import { toast } from "react-toastify";
 
 const TodoPage = () => {
@@ -74,7 +76,7 @@ const TodoPage = () => {
   return (
     <div className="m-0 h-screen w-screen bg-sky-100 bg-linear-to-t from-white-50 to-blue-300">
       <div className="flex justify-center items-center h-screen">
-        <div className="bg-sky-50 p-10 w-4/5 h-3/4 bg-linear-to-t from-white-500 to-blue-200 rounded-3xl shadow-lg border-0 ">
+        <div className="bg-sky-50 p-10 w-3/5 h-3/4 bg-linear-to-t from-white-500 to-blue-200 rounded-3xl shadow-lg border-0 flex flex-col justify-between">
           {!task ? (
             <BiLoaderCircle
               size={40}
@@ -83,36 +85,42 @@ const TodoPage = () => {
           ) : (
             <>
               {" "}
-              <div className="flex justify-between items-center mb-5">
+              <div className="flex flex-col mb-5">
                 <h2 className="font-extrabold font-sans text-4xl ">
                   {t("todo_selected")}
                 </h2>
+                <div>
+                  <p className="text-2xl font-bold font-sans my-5">
+                    {task?.todo}
+                  </p>
+                  <p className="text-lg font-medium font-sans mb-5">
+                    {task?.desc}
+                  </p>
+                  <p className="text-lg font-medium font-sans mb-5 flex flex-row items-center">
+                    {t("progress")} :{" "}
+                    {task?.completed ? (
+                      <span className="flex flex-row">
+                        <TbProgressCheck
+                          fontSize={24}
+                          className="mx-2"
+                          color="green"
+                        />
+                        {t("completed")}
+                      </span>
+                    ) : (
+                      <span className="flex flex-row">
+                        <RiProgress2Line
+                          fontSize={24}
+                          className="mx-2"
+                          color="red"
+                        />
+                        {t("in_progress")}
+                      </span>
+                    )}
+                  </p>
+                </div>
               </div>
               <div className="flex flex-col">
-                <p className="text-2xl font-bold font-sans my-5">
-                  {task?.todo}
-                </p>
-                <p className="text-lg font-medium font-sans mb-5">
-                  {task?.desc}
-                </p>
-                <p className="text-lg font-medium font-sans mb-5">
-                  {t("progress")} :
-                  {task?.completed ? t("completed") : t("in_progress")}
-                </p>
-                <div className="flex flex-row justify-between my-5">
-                  <button
-                    className="bg-sky-600 w-auto rounded-2xl py-4 px-8 mr-5 text-white font-sans font-bold cursor-pointer"
-                    onClick={handleUpdateTodo}
-                  >
-                    {t("update")}
-                  </button>
-                  <button
-                    className="bg-red-400 w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
-                    onClick={handleDeleteTodo}
-                  >
-                    {t("delete")}
-                  </button>
-                </div>
                 <div>
                   {!task?.completed && (
                     <button
@@ -122,6 +130,20 @@ const TodoPage = () => {
                       {t("mark_as_completed")}
                     </button>
                   )}
+                  <div className="flex flex-row justify-between my-5">
+                    <button
+                      className="bg-sky-600 w-auto rounded-2xl py-4 px-8 mr-5 text-white font-sans font-bold cursor-pointer"
+                      onClick={handleUpdateTodo}
+                    >
+                      {t("update")}
+                    </button>
+                    <button
+                      className="bg-red-400 w-auto rounded-2xl py-4 px-8  text-white font-sans font-bold cursor-pointer"
+                      onClick={handleDeleteTodo}
+                    >
+                      {t("delete")}
+                    </button>
+                  </div>
                 </div>
               </div>
             </>

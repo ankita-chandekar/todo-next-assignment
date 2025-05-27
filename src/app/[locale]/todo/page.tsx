@@ -70,7 +70,7 @@ const Todo = () => {
     <>
       <div className="m-0 h-screen w-screen bg-sky-100 bg-linear-to-t from-white-50 to-blue-300">
         <div className="flex justify-center items-center h-screen">
-          <div className="bg-sky-50 p-10 w-4/5 h-3/4 bg-linear-to-t from-white-500 to-blue-200 rounded-3xl shadow-lg border-0 ">
+          <div className="bg-sky-50 p-10 w-3/5 h-3/4 bg-linear-to-t from-white-500 to-blue-200 rounded-3xl shadow-lg border-0 ">
             <LogoutWrapper />
             <div className="flex justify-between items-center mb-5">
               <h2 className="font-extrabold font-sans text-4xl ">
