@@ -2,8 +2,9 @@ import connectDB from "@/lib/mongodb";
 import Todo from "@/models/Todo";
 import { Session, getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+// import { authOptions } from "../auth/[...nextauth]/route";
 import { TODO } from "@/types/todoTypes";
+import { authOptions } from "@/lib/authOptions";
 
 export async function GET() {
   try {

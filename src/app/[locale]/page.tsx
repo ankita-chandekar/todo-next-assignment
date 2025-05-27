@@ -3,10 +3,11 @@ import initTranslations from "./../i18n";
 const namespaces = ["common"];
 
 export default async function Home({
-  params: { locale },
+  params,
 }: {
-  params: { [key: string]: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   const { t, resources } = await initTranslations(locale, namespaces);
   return (
     <TranslationsProvider

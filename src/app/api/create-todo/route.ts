@@ -1,8 +1,8 @@
+import { authOptions } from "@/lib/authOptions";
 import connectDB from "@/lib/mongodb";
 import Todo from "@/models/Todo";
 import { Session, getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {}
 

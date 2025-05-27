@@ -3,8 +3,14 @@ import CreateTodo from "./page";
 
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";
+import { ReactNode } from "react";
 
-const layout = async ({ params }: { params: { locale: string } }) => {
+type LayoutProps = {
+  params: Promise<{ locale: string }>;
+  children: ReactNode;
+};
+
+export default async function Layout({ children, params }: LayoutProps) {
   const { locale } = await params;
   const { resources } = await initTranslations(locale, ["common"]);
 
@@ -15,9 +21,8 @@ const layout = async ({ params }: { params: { locale: string } }) => {
       namespaces={["common"]}
     >
       <CreateTodo />
+      {children}
       <ToastContainer autoClose={3000} />
     </TranslationsProvider>
   );
-};
-
-export default layout;
+}

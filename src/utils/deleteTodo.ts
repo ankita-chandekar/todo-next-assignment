@@ -1,9 +1,8 @@
-import { baseURL } from "@/lib/baseURL";
 import { TODO } from "@/types/todoTypes";
 
 export const handleDeleteTodo = async (id: string) => {
   try {
-    const deleteTodo = await fetch(`${baseURL}/api/todo/${id}`, {
+    const deleteTodo = await fetch(`/api/todo/${id}`, {
       method: "DELETE",
     });
 

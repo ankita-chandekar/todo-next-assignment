@@ -1,5 +1,3 @@
-import { baseURL } from "@/lib/baseURL";
-
 type RegisterFormResponse = {
   success: boolean;
   error: string | null;
@@ -13,7 +11,7 @@ const registerForm = async (
   const password = formData.get("password") as string;
 
   try {
-    const response = await fetch(`${baseURL}/api/register`, {
+    const response = await fetch(`/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

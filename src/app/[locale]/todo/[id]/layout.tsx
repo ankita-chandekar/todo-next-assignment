@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";
 
-const layout = async ({ params }: { params: { locale: string } }) => {
+const layout = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   const { resources } = await initTranslations(locale, ["common"]);
   return (

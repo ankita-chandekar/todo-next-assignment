@@ -3,7 +3,7 @@ import LanguageChanger from "@/components/LanguageSwitcher";
 import TranslationsProvider from "@/components/TranslationsProvider";
 import Login from "./page";
 
-const layout = async ({ params }: { params: { locale: string } }) => {
+const layout = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   const { resources } = await initTranslations(locale, ["common"]);
 

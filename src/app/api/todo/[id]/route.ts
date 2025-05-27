@@ -4,10 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isValidObjectId } from "mongoose";
 import { TODO } from "@/types/todoTypes";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET({ params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     const { id }: { id: string } = await params;
@@ -28,11 +25,11 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const { id }: { id: string } = params;
+    const { id }: { id: string } = await params;
 
     const {
       todo,
@@ -65,12 +62,12 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
 
-    const { id } = await params;
+    const { id }: { id: string } = await params;
     if (!isValidObjectId(id)) {
       return NextResponse.json({ error: "Invalid ID format" }, { status: 400 });
     }

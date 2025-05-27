@@ -1,18 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { FiEdit } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
+import LogoutWrapper from "@/components/LogoutWrapper";
+import { TODO } from "@/types/todoTypes";
+import { handleDeleteTodo } from "@/utils/deleteTodo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { handleDeleteTodo } from "@/utils/deleteTodo";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FaSearch } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
 import { RiProgress2Line } from "react-icons/ri";
 import { TbProgressCheck } from "react-icons/tb";
 import { ToastContainer, toast } from "react-toastify";
-import { FaSearch } from "react-icons/fa";
-import LogoutWrapper from "@/components/LogoutWrapper";
-import { TODO } from "@/types/todoTypes";
-import { baseURL } from "@/lib/baseURL";
-import { useTranslation } from "react-i18next";
 
 const Todo = () => {
   const [search, setSearch] = useState("");
@@ -23,7 +22,7 @@ const Todo = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const getTodo = await fetch(`${baseURL}/api/todo`, {
+      const getTodo = await fetch(`/api/todo`, {
         cache: "no-store",
       });
       const response = await getTodo.json();
@@ -45,13 +44,14 @@ const Todo = () => {
     const deletedId: string | undefined = await handleDeleteTodo(id);
     if (deletedId) {
       setTodos((prev) => prev.filter((ele: TODO) => ele?._id !== deletedId));
+      setAllTodos((prev) => prev.filter((ele: TODO) => ele?._id !== deletedId));
       toast.success(t("task_deleted_success"));
     }
   };
 
   React.useEffect(() => {
     const handleSearch = () => {
-      const filterTodo: TODO[] = todos.filter((ele: TODO) =>
+      const filterTodo: TODO[] = allTodos.filter((ele: TODO) =>
         ele.todo.toLowerCase().includes(search)
       );
 
@@ -64,7 +64,7 @@ const Todo = () => {
     } else {
       handleSearch();
     }
-  }, [search, allTodos, todos]);
+  }, [search, allTodos]);
 
   return (
     <>

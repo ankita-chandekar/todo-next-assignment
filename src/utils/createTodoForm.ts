@@ -1,5 +1,3 @@
-import { baseURL } from "@/lib/baseURL";
-
 type CreateTodoResponse = {
   success: boolean;
   error: string | null;
@@ -16,7 +14,7 @@ const createTodoForm = async (
   localStorage.removeItem("update-todo");
   try {
     if (id) {
-      const response = await fetch(`${baseURL}/api/todo/${id}`, {
+      const response = await fetch(`/api/todo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +31,7 @@ const createTodoForm = async (
         error: null,
       };
     } else {
-      const response = await fetch(`${baseURL}/api/create-todo`, {
+      const response = await fetch(`/api/create-todo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
