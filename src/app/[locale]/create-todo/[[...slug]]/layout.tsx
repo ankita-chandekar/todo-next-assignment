@@ -20,7 +20,6 @@ export default async function Layout({ children, params }: LayoutProps) {
       resources={resources}
       namespaces={["common"]}
     >
-      <CreateTodo />
       {children}
       <ToastContainer autoClose={3000} />
     </TranslationsProvider>
