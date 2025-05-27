@@ -107,7 +107,7 @@ const Todo = () => {
                       key={element._id}
                     >
                       <Link href={`/todo/${element?._id}`}>
-                        <p className="font-sans text-xl font-semibold">
+                        <p className="font-sans text-xl font-semibold hover:underline">
                           {element?.todo}
                         </p>
                       </Link>
